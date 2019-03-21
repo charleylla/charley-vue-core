@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <p>A:{{a}}</p>
+    <p>C:{{b.c}}</p>
+    <input v-model="text"/>
+    <h2>{{text}}</h2>
+    <h3>{{computedAC}}</h3>
+  </div>  
+</body>
+<script src="./js/tool.js"></script>
+<script src="./js/batcher.js"></script>
+<script src="./js/observer.js"></script>
+<script src="./js/dep.js"></script>
+<script src="./js/watcher.js"></script>
+<script src="./js/compile.js"></script>
+<script src="./js/mvvm.js"></script>
+<script>
+  const vm = new Vue({
+    el:"#app",
+    data:{
+      text:"Hello World",
+      a:1,
+      b:{c:"C"}
+    },
+    computed:{
+      computedAC(){
+        return this.a + "-" + this.b.c;
+      }
+    }
+  })
+  // 如果不做批量更新，会很慢
+  // 很慢····
+  // 因此，需要使用批量更新
+  for(let i = 0; i < 100000; i ++){
+    vm.a  =  i;
+  }
+</script>
+</html>
